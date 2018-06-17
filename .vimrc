@@ -4,12 +4,8 @@ filetype off                  " required
 " UTF-8 Support
 set encoding=utf-8
 
-" Enable code folding
-set foldmethod=indent
-set foldlevel=99
-
-" Enable folding with the spacebar
-nnoremap <space> za
+" Enable mouse support
+set mouse=a
 
 " More natural split opening
 set splitbelow
@@ -31,15 +27,15 @@ au BufNewFile,BufRead *.js,*.html,*.css
 highlight BadWhitespace ctermbg=red guibg=darkred
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
 " Line numbering
 set nu
 
 " Syntax highlighting
 syntax on
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
@@ -49,13 +45,12 @@ Plugin 'gmarik/Vundle.vim'
 
 " Python necessities
 Plugin 'klen/python-mode'
-" Auto Complete
-let g:pymode_rope_complete_on_dot = 1 
 
 " File Browsing
 Plugin 'scrooloose/nerdtree'
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-autocmd vimenter * NERDTree
+
+" Git status flags for nerdtree
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " Super Searching
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -63,14 +58,38 @@ Plugin 'ctrlpvim/ctrlp.vim'
 " Git Integration
 Plugin 'tpope/vim-fugitive'
 
+" Git gutter
+Plugin 'airblade/vim-gitgutter'
+
+" Surround brackets
+Plugin 'tpope/vim-surround'
+
 " Powerline - cool status bar
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " Color Schemes
 Plugin 'liuchengxu/space-vim-dark'
-colorscheme space-vim-dark
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" NERDTree settings
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd vimenter * NERDTree
+
+" python-mode settings
+let g:pymode_rope = 1
+let g:pymode_indent = 1
+let g:pymode_virtualenv = 1
+let g:pymode_lint = 1
+let g:pymode_lint_on_fly = 0
+
+" Colorscheme settings
+set t_Co=256
+colorscheme space-vim-dark
+hi Comment guifg=#5C6370 ctermfg=59
+hi Normal     ctermbg=NONE guibg=NONE
+hi LineNr     ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
