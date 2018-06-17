@@ -87,9 +87,6 @@ let g:pymode_lint = 1
 let g:pymode_lint_on_fly = 0
 
 " Colorscheme settings
-set t_Co=256
+set termguicolors
 colorscheme space-vim-dark
 hi Comment guifg=#5C6370 ctermfg=59
-hi Normal     ctermbg=NONE guibg=NONE
-hi LineNr     ctermbg=NONE guibg=NONE
-hi SignColumn ctermbg=NONE guibg=NONE
