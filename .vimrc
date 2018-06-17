@@ -4,6 +4,9 @@ filetype off                  " required
 " UTF-8 Support
 set encoding=utf-8
 
+" Make the backspace key delete characters as expected
+set backspace=indent,eol,start
+
 " Enable mouse support
 set mouse=a
 
