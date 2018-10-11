@@ -97,11 +97,6 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# vi fun
-export VISUAL=vim
-export EDITOR="$VISUAL"
-set -o vi
-
 #==========================================================
 # ALIASES -- Keep in #SYNC with DE TUNNEL SCRIPT
 # (Last copied here 20180522)
@@ -124,10 +119,11 @@ alias ssh-prod-etl01_dmf='ssh alex_chavez@localhost -p 51022'
 #==========================================================
 alias ll="ls -lah"
 
-# startup virtualenv-burrito
-if [ -f $HOME/.venvburrito/startup.sh ]; then
-    . $HOME/.venvburrito/startup.sh
-fi
+# Aliases for installed CLI utilities
+alias cat="bat"
+alias ping="prettyping --nolegend"
+alias top="htop"
+alias help="tldr"
 
 # For asdf (Extendable version manager with support for Ruby, Node.jsm Elixir, Erlang & more)
 . $HOME/.asdf/asdf.sh
@@ -135,7 +131,6 @@ fi
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -153,3 +148,7 @@ fi
 if which pyenv-virtualenv-init > /dev/null; then
   eval "$(pyenv virtualenv-init -)";
 fi
+
+# Set up tab completion for the go-jira CLI client
+eval "$(jira --completion-script-bash)"
+
