@@ -152,3 +152,5 @@ fi
 # Set up tab completion for the go-jira CLI client
 eval "$(jira --completion-script-bash)"
 
+# byobu
+export BYOBU_PREFIX=/usr/local
