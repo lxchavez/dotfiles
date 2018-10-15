@@ -1,23 +1,5 @@
-set nocompatible              " required
-filetype off                  " required
-
-" UTF-8 Support
-set encoding=utf-8
-
-" Make the backspace key delete characters as expected
-set backspace=indent,eol,start
-
 " Enable mouse support
 set mouse=a
-
-" Spaces > Tabs
-filetype plugin indent on
-" show existing tab with 4 spaces width
-set tabstop=4
-" when indenting with '>', use 4 spaces width
-set shiftwidth=4
-" On pressing tab, insert 4 spaces
-set expandtab
 
 " More natural split opening
 set splitbelow
@@ -28,19 +10,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
-" Web Development indentation
-au BufNewFile,BufRead *.js,*.html,*.css
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2
-
-" Flag unnecessary whitespace
-highlight BadWhitespace ctermbg=red guibg=darkred
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-
-" Line numbering
-set nu
 
 " Syntax highlighting
 syntax on
@@ -54,6 +23,9 @@ Plugin 'gmarik/Vundle.vim'
 
 " add all your plugins here (note older versions of Vundle
 " used Bundle instead of Plugin)
+
+" A Sensible Vim Configuration
+Plugin 'tpope/vim-sensible'
 
 " Python necessities
 Plugin 'klen/python-mode'
@@ -76,12 +48,6 @@ Plugin 'airblade/vim-gitgutter'
 " Surround brackets
 Plugin 'tpope/vim-surround'
 
-" Powerline - cool status bar
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-
-" Color Schemes
-Plugin 'liuchengxu/space-vim-dark'
-
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -97,8 +63,3 @@ let g:pymode_indent = 1
 let g:pymode_virtualenv = 1
 let g:pymode_lint = 1
 let g:pymode_lint_on_fly = 0
-
-" Colorscheme settings
-set termguicolors
-colorscheme space-vim-dark
-hi Comment guifg=#5C6370 ctermfg=59
