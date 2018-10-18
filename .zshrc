@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/Users/achavez/Library/Python/2.7/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/Users/achavez/.local/bin:/Users/achavez/Library/Python/2.7/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/achavez/.oh-my-zsh
@@ -60,7 +60,7 @@ source $ZSH/oh-my-zsh.sh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="refined"
+ZSH_THEME=""
 
 # User configuration
 
@@ -91,6 +91,10 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# nvim is now my preferred text editor.
+alias vi='nvim'
+alias vim='nvim'
+
 #==========================================================
 # ALIASES -- Keep in #SYNC with DE TUNNEL SCRIPT
 # (Last copied here 20180522)
@@ -118,6 +122,11 @@ alias cat="bat"
 alias ping="prettyping --nolegend"
 alias top="htop"
 alias help="tldr"
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+
+# Aliases for useful workflows
+alias dw01="pgcli -h localhost -p 55432 -U ddong mach"
 
 # For asdf (Extendable version manager with support for Ruby, Node.jsm Elixir, Erlang & more)
 . $HOME/.asdf/asdf.sh
@@ -152,3 +161,6 @@ export BYOBU_PREFIX=/usr/local
 # pure
 autoload -U promptinit; promptinit
 prompt pure
+
+# fzf (as a replacement/improvement to Ctrl+r)
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
