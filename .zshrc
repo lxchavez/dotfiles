@@ -56,7 +56,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -67,7 +66,7 @@ ZSH_THEME=""
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -82,56 +81,13 @@ ZSH_THEME=""
 # ssh
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# nvim is now my preferred text editor.
-alias vi='nvim'
-alias vim='nvim'
-
-#==========================================================
-# ALIASES -- Keep in #SYNC with DE TUNNEL SCRIPT
-# (Last copied here 20180522)
-#==========================================================
-alias dbconn-prod-dw01_dmf='USAGE: Configure DB TOOLS to connect to DW01 db via host=localhost,port=55432'
-alias dbconn-prod-dw02_dmf='USAGE: Configure DB TOOLS to connect to DW02 db via host=localhost,port=56432'
-alias dbconn-prod-dwdev_dmf='USAGE: Configure DB TOOLS to connect to DWDEV db via host=localhost,port=56439'
-alias dmf_aliases_dbconn='echo ""; echo "*** LIST OF ALL DMF DBCONN ALISES: ***"; echo ""; echo "$(alias | grep -i dbconn | egrep -i "_dmf|dmf_") "
-'
-alias dmf_aliases_rdp='echo ""; echo "*** LIST OF ALL DMF RDP ALISES: ***"; echo ""; echo "$(alias | grep -i rdp | egrep -i "_dmf|dmf_") "'
-alias dmf_aliases_ssh='echo ""; echo "*** LIST OF ALL DMF SSH ALISES: ***"; echo ""; echo "$(alias | grep -i ssh | egrep -i "_dmf|dmf_") "'
-alias dmf_ps_psnl_ssh='echo ""; echo "*** LIST OF ALL PSNL SSH PROCESSES (REGARDLESS of DMF): ***"; echo ""; echo "$(ps | grep -i ssh) "'
-alias helpme='echo -e '\''\n*** MAIN HELPME: SHOWING ALL DMF ALIASES ETC: ***\n'\''; alias | grep -i '\''dmf'\'' '
-alias rdp-prod-rdp01_dmf='USAGE: Configure RDP to connect to RDP01 server via host=localhost,port=53389'
-alias rdp-prod-report01_dmf='USAGE: Configure RDP to connect to REPORT01 server via host=localhost,port=52389'
-alias ssh-prod-dw01_dmf='ssh alex_chavez@localhost -p 55022'
-alias ssh-prod-dw02_dmf='ssh alex_chavez@localhost -p 56022'
-alias ssh-prod-dwdev_dmf='ssh alex_chavez@localhost -p 57022'
-alias ssh-prod-etl01_dmf='ssh alex_chavez@localhost -p 51022'
-#==========================================================
-alias ll="ls -lah"
-
-# Aliases for installed CLI utilities
-alias cat="bat"
-alias ping="prettyping --nolegend"
-alias top="htop"
-alias help="tldr"
-alias preview="fzf --preview 'bat --color \"always\" {}'"
-alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
-
-# Aliases for useful workflows
-alias dw01="pgcli -h localhost -p 55432 -U ddong mach"
+# Import aliases
+. ~/.aliases
+. ~/.aliases-work
 
 # For asdf (Extendable version manager with support for Ruby, Node.jsm Elixir, Erlang & more)
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
-
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
