@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/Users/achavez/.local/bin:/Users/achavez/Library/Python/2.7/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/Users/achavez/.local/bin:/Users/achavez/Library/Python/2.7/bin:$HOME/.bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/achavez/.oh-my-zsh
@@ -66,7 +66,8 @@ ZSH_THEME=""
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-export LANG=en_US.UTF-8
+export LC_ALL='en_US.UTF-8'
+export LANG='en_US.UTF-8'
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -98,18 +99,21 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /Users/achavez/.asdf/installs/nodejs/8.11.3/.npm/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/achavez/.asdf/installs/nodejs/8.11.3/.npm/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
-# Add pyenv init to enable shims and autocompletion
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+# pipenv autocompletions
+if which pipenv > /dev/null; then
+    eval "$(pipenv --completion)"
+    export PIPENV_PYTHON="${PYENV_ROOT}/shims/python"
 fi
 
-# Enable the pyenv-virtualenv plugin
-if which pyenv-virtualenv-init > /dev/null; then
-  eval "$(pyenv virtualenv-init -)";
+# Load pyenv automatically by appending
+if which pyenv > /dev/null; then
+    eval "$(pyenv init -)"
 fi
 
 # Set up tab completion for the go-jira CLI client
-eval "$(jira --completion-script-bash)"
+if which jira > /dev/null; then
+    eval "$(jira --completion-script-bash)"
+fi
 
 # byobu
 export BYOBU_PREFIX=/usr/local
