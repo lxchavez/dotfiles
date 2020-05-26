@@ -12,6 +12,7 @@ export LANG='en_US.UTF-8'
 # else
 #   export EDITOR='mvim'
 # fi
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -21,6 +22,9 @@ export LANG='en_US.UTF-8'
 
 # Import aliases
 . ~/.aliases
+
+# Import custom functions
+. ~/.zsh-functions
 
 # pipenv autocompletions
 if which pipenv > /dev/null; then

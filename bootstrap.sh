@@ -19,7 +19,7 @@ fi
 sudo apt-get install -qq \
   apache2-utils \
   apt-transport-https \
-  bat \
+#  bat \
   build-essential \
   bzr \
   ca-certificates \
@@ -59,7 +59,7 @@ sudo apt-get install -qq \
   netcat-openbsd \
   openssh-server \
   pkg-config \
-  prettyping \
+#  prettyping \
   protobuf-compiler \
   pwgen \
   python \
@@ -80,7 +80,7 @@ sudo apt-get install -qq \
   sqlite3 \
   stow \
   sudo \
-  tldr \
+#  tldr \
   tmate \
   tmux \
   tree \
@@ -203,11 +203,13 @@ echo "==> Setting shell to zsh..."
 chsh -s /usr/bin/zsh
 
 echo "==> Creating dev directories"
-mkdir -p /root/code
+mkdir -p "${HOME}/bin"
+mkdir -p "${HOME}/downloads"
+mkdir -p "${HOME}/workspace"
 
-if [ ! -d /root/code/dotfiles ]; then
+if [ ! -d "/${HOME}/workspace/dotfiles" ]; then
   echo "==> Setting up dotfiles"
-  cd "/root/code"
+  cd "/${HOME}/workspace"
   git clone --recursive https://github.com/lxchavez/dotfiles.git
 
   TMUX_CONFIG_FILE="${HOME}/.tmux/.tmux.conf"
@@ -219,12 +221,12 @@ if [ ! -d /root/code/dotfiles ]; then
     cp $(pwd)/.tmux/.tmux.conf.local "${HOME}"
   fi
 
-  cd "/root/code/dotfiles"
+  cd "/${HOME}/workspace/dotfiles"
   git remote set-url origin git@github.com:lxchavez/dotfiles.git
 
   # the reason we dont't copy the files individually is, to easily push changes
   # if needed
-  ln -sfn $(pwd)/.vimrc "${HOME}/.vimrc"
+  # ln -sfn $(pwd)/.vimrc "${HOME}/.vimrc"
   ln -sfn $(pwd)/.zshrc "${HOME}/.zshrc"
   ln -sfn $(pwd)/.gitconfig "${HOME}/.gitconfig"
   ln -sfn $(pwd)/.zprestorc "${HOME}/.zpreztorc"
