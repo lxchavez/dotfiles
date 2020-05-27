@@ -20,6 +20,7 @@ Plug 'airblade/vim-gitgutter'
 " Surround brackets
 Plug 'tpope/vim-surround'
 
+" Syntax plugins
 Plug 'hdima/python-syntax'
 
 " Initialize plugin system
