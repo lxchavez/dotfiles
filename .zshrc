@@ -11,8 +11,6 @@ fpath+=$HOME/.zsh/pure
 
 # Aliases
 alias ll="ls -lah"
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
 
 # Aliases for installed CLI utilities
 if [ -x "$(command -v fzf)" ]; then
@@ -24,10 +22,14 @@ fi
 if [ -x "$(command -v ncdu)" ]; then
     alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 fi
-if [ -x "$(command -v neovim)" ]; then
+if [ -x "$(command -v nvim)" ]; then
     export EDITOR=nvim
     alias vi="nvim"
     alias vim="nvim"
+fi
+if [ -x "$(command -v xclip)" ]; then
+    alias pbpaste='xclip -selection clipboard -o'
+    alias pbcopy='xclip -selection clipboard'
 fi
 
 # You may need to manually set your language environment
