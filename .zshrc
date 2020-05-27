@@ -64,10 +64,8 @@ fi
 # Keep this at the bottom
 
 # pure
-if [ -x "$(command -v prompt)" ]; then
-    autoload -U promptinit; promptinit
-    prompt pure
-fi
+autoload -U promptinit; promptinit
+prompt pure
 
 # prezto
 if [ -d "${HOME}/.zprezto" ]; then
