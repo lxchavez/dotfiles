@@ -11,8 +11,10 @@ if [ -d /usr/local/go/bin ]; then
     PATH="/usr/local/go/bin:$PATH"
 fi
 
-# For the pure zsh prompt
-fpath+=$HOME/.zsh/pure
+# Configure fpath for the pure zsh prompt
+if [ -d "${HOME}/.zsh/pure" ]; then
+    fpath+=$HOME/.zsh/pure
+fi
 
 # Aliases
 alias ll="ls -lah"
