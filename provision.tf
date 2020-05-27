@@ -90,6 +90,11 @@ resource "digitalocean_firewall" "dev" {
 	}
 }
 
+resource "digitalocean_floating_ip" "dev" {
+  droplet_id = "${digitalocean_droplet.dev.id}"
+  region     = "${digitalocean_droplet.dev.region}"
+}
+
 output "public_ip" {
-  value = "${digitalocean_droplet.dev.ipv4_address}"
+  value = "${digitalocean_floating_ip.dev.ip_address}"
 }

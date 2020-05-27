@@ -6,6 +6,9 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# For the pure zsh prompt
+fpath+=$HOME/.zsh/pure
+
 # Aliases
 alias ll="ls -lah"
 alias pbcopy='xclip -selection clipboard'
@@ -61,8 +64,10 @@ fi
 # Keep this at the bottom
 
 # pure
-autoload -U promptinit; promptinit
-prompt pure
+if [ -x "$(command -v prompt)" ]; then
+    autoload -U promptinit; promptinit
+    prompt pure
+fi
 
 # prezto
 if [ -d "${HOME}/.zprezto" ]; then

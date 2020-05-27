@@ -14,6 +14,11 @@ if [ -d "${HOME}/workspace/dotfiles" ]; then
   ln -sfn $(pwd)/.zprestorc "${HOME}/.zpreztorc"
 fi
 
+if [ ! -d "${HOME}/.zsh/pure" ]; then
+  mkdir -p "$HOME/.zsh"
+  git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+fi
+
 echo "==> Setting shell to zsh..."
 chsh -s /usr/bin/zsh
 
