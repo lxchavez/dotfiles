@@ -180,13 +180,15 @@ zsh /tmp/bootstrap-zsh.sh
 TMUX_CONFIG_FILE="${HOME}/.tmux/.tmux.conf"
 if [ ! -f "${TMUX_CONFIG_FILE}" ]; then
   echo "==> Pulling Oh My Tmux! config files..."
+  cd ${HOME}
   git clone https://github.com/gpakosz/.tmux.git
   mkdir -p "${HOME}/.tmux"
-  ln -sfn $(pwd)/.tmux/.tmux.conf "${HOME}/.tmux/.tmux.conf"
-  cp $(pwd)/.tmux/.tmux.conf.local "${HOME}"
+  ln -s -f .tmux/.tmux.conf
+  cp .tmux/.tmux.conf.local .
 fi
 
 echo "==> Creating dev directories..."
+mkdir -p "${HOME}/.local/bin"
 mkdir -p "${HOME}/bin"
 mkdir -p "${HOME}/downloads"
 mkdir -p "${HOME}/workspace"
@@ -199,8 +201,8 @@ if [ ! -d "${HOME}/workspace/dotfiles" ]; then
   cd "${HOME}/workspace/dotfiles"
   git remote set-url origin git@github.com:lxchavez/dotfiles.git
 
-  # the reason we dont't copy the files individually is, to easily push changes
-  # if needed
+  # symlink config files so we can sync them via git
+  mkdir -p "${HOME}/.config/nvim
   ln -sfn $(pwd)/.config/nvim/init.vim "${HOME}/.config/nvim/init.vim"
   ln -sfn $(pwd)/.zshrc "${HOME}/.zshrc"
   ln -sfn $(pwd)/.gitconfig "${HOME}/.gitconfig"

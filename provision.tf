@@ -39,7 +39,6 @@ resource "digitalocean_droplet" "dev" {
     }
   }
 
-
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/bootstrap.sh",
