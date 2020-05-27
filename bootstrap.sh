@@ -219,6 +219,21 @@ if ! [ -x "$(command -v code-server)" ]; then
     systemctl --user enable --now code-server
     echo "Now visit http://127.0.0.1:8080"
     echo "code-server password is in ~/.config/code-server/config.yaml"
+
+    if ! [ -x "$(command -v caddy)" ]; then
+        echo "deb [trusted=yes] https://apt.fury.io/caddy/ /" \
+            | sudo tee -a /etc/apt/sources.list.d/caddy-fury.list
+        sudo apt update
+        sudo apt-get install -qq caddy
+
+        if [-f "/etc/caddy/Caddyfile"]; then
+            export DOMAIN_NAME="dev.alexchavez.codes"
+            echo "${DOMAIN_NAME}\nreverse_proxy 127.0.0.1:8080" > /etc/caddy/Caddyfile
+            sudo systemctl reload caddy
+            echo "Now visit https://${DOMAIN_NAME}"
+            echo "code-server password is in ~/.config/code-server/config.yaml"
+        fi
+    fi
 fi
 
 echo ""
