@@ -45,25 +45,29 @@ export LANG='en_US.UTF-8'
 # export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # Custom zsh functions
-open() {
-  setsid nohup xdg-open $1 > /dev/null 2> /dev/null
-}
+if [ -x "$(command -v xdg-open)" ]; then
+    open() {
+        setsid nohup xdg-open $1 > /dev/null 2> /dev/null
+    }
+fi
 
-exit() {
-  if [[ -z $TMUX ]]; then
-    builtin exit
-    return
-  fi
+if [ -x "$(command -v tmux)" ]; then
+    exit() {
+        if [[ -z $TMUX ]]; then
+            builtin exit
+            return
+        fi
 
-  panes=$(tmux list-panes | wc -l)
-  wins=$(tmux list-windows | wc -l) 
-  count=$(($panes + $wins - 1))
-  if [ $count -eq 1 ]; then
-    tmux detach
-  else
-    builtin exit
-  fi
-}
+        panes=$(tmux list-panes | wc -l)
+        wins=$(tmux list-windows | wc -l) 
+        count=$(($panes + $wins - 1))
+        if [ $count -eq 1 ]; then
+            tmux detach
+        else
+            builtin exit
+        fi
+    }
+fi
 
 # pipenv autocompletions
 if [ -x "$(command -v pipenv)" ]; then
@@ -79,22 +83,17 @@ if [ -x "$(command -v pyenv)" ]; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
-# tilix
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-    source /etc/profile.d/vte.sh
+# Ensure that we have an ssh config with AddKeysToAgent set to true
+if [ ! -f ~/.ssh/config ] || ! cat ~/.ssh/config | grep AddKeysToAgent | grep yes > /dev/null; then
+    echo "AddKeysToAgent  yes" >> ~/.ssh/config
 fi
-
- # Ensure that we have an ssh config with AddKeysToAgent set to true
- if [ ! -f ~/.ssh/config ] || ! cat ~/.ssh/config | grep AddKeysToAgent | grep yes > /dev/null; then
-     echo "AddKeysToAgent  yes" >> ~/.ssh/config
- fi
- # Ensure a ssh-agent is running so you only have to enter keys once
- if [ ! -S ~/.ssh/ssh_auth_sock ]; then
-   eval `ssh-agent`
-   ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
-   ssh-add ~/.ssh/github
- fi
- export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+# Ensure a ssh-agent is running so you only have to enter keys once
+if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+    eval `ssh-agent`
+    ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+    ssh-add ~/.ssh/github
+    export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+fi
 
 # Keep this at the bottom
 
