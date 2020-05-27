@@ -217,8 +217,6 @@ if ! [ -x "$(command -v code-server)" ]; then
     curl -sSOL https://github.com/cdr/code-server/releases/download/v${CODE_SERVER_VERSION}/code-server_${CODE_SERVER_VERSION}_amd64.deb
     sudo dpkg -i code-server_${CODE_SERVER_VERSION}_amd64.deb
     systemctl --user enable --now code-server
-    echo "Now visit http://127.0.0.1:8080"
-    echo "code-server password is in ~/.config/code-server/config.yaml"
 
     if ! [ -x "$(command -v caddy)" ]; then
         echo "deb [trusted=yes] https://apt.fury.io/caddy/ /" \
