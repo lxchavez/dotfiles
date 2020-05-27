@@ -174,15 +174,11 @@ if [ ! -d "${HOME}/.fzf" ]; then
   popd
 fi
 
-echo "==> Installing zsh specific config..."
-zsh /tmp/bootstrap-zsh.sh
-
 TMUX_CONFIG_FILE="${HOME}/.tmux/.tmux.conf"
 if [ ! -f "${TMUX_CONFIG_FILE}" ]; then
   echo "==> Pulling Oh My Tmux! config files..."
-  cd ${HOME}
+  cd
   git clone https://github.com/gpakosz/.tmux.git
-  mkdir -p "${HOME}/.tmux"
   ln -s -f .tmux/.tmux.conf
   cp .tmux/.tmux.conf.local .
 fi
@@ -202,12 +198,14 @@ if [ ! -d "${HOME}/workspace/dotfiles" ]; then
   git remote set-url origin git@github.com:lxchavez/dotfiles.git
 
   # symlink config files so we can sync them via git
-  mkdir -p "${HOME}/.config/nvim
+  mkdir -p "${HOME}/.config/nvim"
   ln -sfn $(pwd)/.config/nvim/init.vim "${HOME}/.config/nvim/init.vim"
   ln -sfn $(pwd)/.zshrc "${HOME}/.zshrc"
   ln -sfn $(pwd)/.gitconfig "${HOME}/.gitconfig"
-  ln -sfn $(pwd)/.zprestorc "${HOME}/.zpreztorc"
 fi
+
+echo "==> Installing zsh specific config..."
+zsh /tmp/bootstrap-zsh.sh
 
 echo ""
 echo "==> Done!"

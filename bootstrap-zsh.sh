@@ -9,6 +9,11 @@ if [ ! -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
   done
 fi
 
+if [ -d "${HOME}/workspace/dotfiles" ]; then
+  cd "${HOME}/workspace/dotfiles"
+  ln -sfn $(pwd)/.zprestorc "${HOME}/.zpreztorc"
+fi
+
 echo "==> Setting shell to zsh..."
 chsh -s /usr/bin/zsh
 
