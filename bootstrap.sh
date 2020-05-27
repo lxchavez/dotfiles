@@ -1,4 +1,6 @@
 #!/bin/bash
+echo ""
+echo "==> Intializing system..."
 
 set -eu
 
@@ -16,7 +18,6 @@ if [ "${UPGRADE_PACKAGES}" != "none" ]; then
   sudo apt-get upgrade -y
 fi
 
-echo "==> Installing new packages ..."
 sudo apt-get install -qq \
   apache2-utils \
   apt-transport-https \
@@ -89,7 +90,7 @@ sudo apt-get install -qq \
 rm -rf /var/lib/apt/lists/*
 
 # install Docker
-if ! [ -x "$(command -v docker)" ]; then
+if ! [ -x "$(command -v snap run docker)" ]; then
   echo " ==> Installing Docker..."
   sudo snap install docker
 fi
@@ -183,7 +184,6 @@ if [ ! -f "${TMUX_CONFIG_FILE}" ]; then
   cp .tmux/.tmux.conf.local .
 fi
 
-echo "==> Creating dev directories..."
 mkdir -p "${HOME}/.local/bin"
 mkdir -p "${HOME}/bin"
 mkdir -p "${HOME}/downloads"
@@ -204,8 +204,22 @@ if [ ! -d "${HOME}/workspace/dotfiles" ]; then
   ln -sfn $(pwd)/.gitconfig "${HOME}/.gitconfig"
 fi
 
-echo "==> Installing zsh specific config..."
-zsh /tmp/bootstrap-zsh.sh
+
+if [ -x "$(command -v zsh)" ]; then
+    zsh /tmp/bootstrap-zsh.sh
+fi
+
+if ! [ -x "$(command -v code-server)" ]; then
+    echo "==> Installing code-server..."
+    export CODE_SERVER_VERSION="3.3.1"
+    mkdir -p "${HOME}/downloads"
+    cd "${HOME}/downloads"
+    curl -sSOL https://github.com/cdr/code-server/releases/download/v${CODE_SERVER_VERSION}/code-server_${CODE_SERVER_VERSION}_amd64.deb
+    sudo dpkg -i code-server_${CODE_SERVER_VERSION}_amd64.deb
+    systemctl --user enable --now code-server
+    echo "Now visit http://127.0.0.1:8080"
+    echo "code-server password is in ~/.config/code-server/config.yaml"
+fi
 
 echo ""
 echo "==> Done!"

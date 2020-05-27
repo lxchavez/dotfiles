@@ -6,6 +6,11 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Add go to the PATH
+if [ -d /usr/local/go/bin ]; then
+    PATH="/usr/local/go/bin:$PATH"
+fi
+
 # For the pure zsh prompt
 fpath+=$HOME/.zsh/pure
 

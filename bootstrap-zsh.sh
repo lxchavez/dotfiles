@@ -21,5 +21,3 @@ fi
 
 echo "==> Setting shell to zsh..."
 chsh -s /usr/bin/zsh
-
-echo "==> Finished zsh config!"
