@@ -90,9 +90,9 @@ sudo apt-get install -qq \
 rm -rf /var/lib/apt/lists/*
 
 # install Docker
-if ! [ -x "$(command -v snap run docker)" ]; then
-  echo " ==> Installing Docker..."
-  sudo snap install docker
+if ! [ -x "$(command -v docker)" ]; then
+    curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
+    sudo sh /tmp/get-docker.sh
 fi
 
 # install Go
