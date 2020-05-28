@@ -1,8 +1,3 @@
-# Save command history
-HISTSIZE=99999
-HISTFILESIZE=999999
-SAVEHIST=$HISTSIZE
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -106,10 +101,6 @@ if [ ! -S ~/.ssh/ssh_auth_sock ]; then
 fi
 
 # Keep this at the bottom
-
-# pure
-autoload -U promptinit; promptinit
-prompt pure
 
 # prezto
 if [ -d "${HOME}/.zprezto" ]; then
