@@ -77,14 +77,6 @@ if [ -x "$(command -v pipenv)" ]; then
     export PIPENV_PYTHON="${PYENV_ROOT}/shims/python"
 fi
 
-# pyenv setup
-if [ -x "$(command -v pyenv)" ]; then
-    export PATH="/usr/bin:$PATH"
-    export PATH="/home/alex/.pyenv/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
-
 # Ensure that we have an ssh config with AddKeysToAgent set to true
 if [ ! -f ~/.ssh/config ] || ! cat ~/.ssh/config | grep AddKeysToAgent | grep yes > /dev/null; then
     echo "AddKeysToAgent  yes" >> ~/.ssh/config

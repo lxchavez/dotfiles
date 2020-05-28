@@ -49,6 +49,7 @@ sudo apt-get install -qq \
   lldb \
   locales \
   man \
+  make \
   mosh \
   mtr-tiny \
   musl-tools \
@@ -232,6 +233,19 @@ if ! [ -x "$(command -v code-server)" ]; then
             echo "code-server password is in ~/.config/code-server/config.yaml"
         fi
     fi
+fi
+
+# install Python tools
+#if ! [ -x "$(command -v pyenv )" ]; then 
+#fi
+
+if ! [ -x "$(command -v pipx )" ]; then 
+  python3 -m pip install --user pipx
+  python3 -m pipx ensurepath
+fi
+
+if ! [ -x "$(command -v pipenv )" ]; then
+  pipx install pipenv
 fi
 
 echo ""

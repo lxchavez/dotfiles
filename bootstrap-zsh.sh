@@ -11,7 +11,9 @@ fi
 
 if [ -d "${HOME}/workspace/dotfiles" ]; then
   cd "${HOME}/workspace/dotfiles"
-  ln -sv $(pwd)/.zpreztorc "${HOME}/.zpreztorc"
+  if [ ! -f "${HOME}/.zpreztorc" ]; then
+    ln -sv $(pwd)/.zpreztorc "${HOME}/.zpreztorc"
+  fi
 fi
 
 if [ ! -d "${HOME}/.zsh/pure" ]; then
