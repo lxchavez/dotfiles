@@ -236,8 +236,9 @@ if ! [ -x "$(command -v code-server)" ]; then
 fi
 
 # install Python tools
-#if ! [ -x "$(command -v pyenv )" ]; then 
-#fi
+if ! [ -x "$(command -v pyenv )" ]; then 
+  curl https://pyenv.run | bash
+fi
 
 if ! [ -x "$(command -v pipx )" ]; then 
   python3 -m pip install --user pipx
@@ -246,6 +247,14 @@ fi
 
 if ! [ -x "$(command -v pipenv )" ]; then
   pipx install pipenv
+fi
+
+# AWS CLI
+if [ ! -x "$(command -v aws)" ]; then
+  cd "${HOME}"
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  unzip awscliv2.zip
+  sudo ./aws/install
 fi
 
 echo ""
