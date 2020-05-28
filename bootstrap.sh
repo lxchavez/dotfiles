@@ -257,5 +257,13 @@ if [ ! -x "$(command -v aws)" ]; then
   sudo ./aws/install
 fi
 
+if [ ! -x "$(command -v terraform)" ]; then
+  export TERRAFORM_VERSION="0.12.26"
+  cd "${HOME}/downloads"
+  curl -sSOL "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
+  unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+  mv "${HOME}/downloads/terraform" /usr/local/bin/terraform
+fi
+
 echo ""
 echo "==> Done!"
