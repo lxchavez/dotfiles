@@ -76,6 +76,9 @@ fi
 if [ -x "$(command -v pipx)" ]; then
     eval "$(register-python-argcomplete pipx)"
 fi
+if [ -f "/usr/local/bin/aws_completer" ]; then
+    complete -C '/usr/local/bin/aws_completer' aws
+fi
 
 # Ensure that we have an ssh config with AddKeysToAgent set to true
 if [ ! -f ~/.ssh/config ] || ! cat ~/.ssh/config | grep AddKeysToAgent | grep yes > /dev/null; then
