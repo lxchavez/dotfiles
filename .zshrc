@@ -46,9 +46,6 @@ fi
 export LC_ALL='en_US.UTF-8'
 export LANG='en_US.UTF-8'
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/id_rsa"
-
 # Custom zsh functions
 if [ -x "$(command -v xdg-open)" ]; then
     open() {
