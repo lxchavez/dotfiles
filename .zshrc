@@ -67,8 +67,7 @@ if [ -x "$(command -v tmux)" ]; then
 fi
 
 # ZSH Autocompletions
-autoload -U bashcompinit
-bashcompinit
+autoload -U bashcompinit; bashcompinit
 
 if [ -x "$(command -v pipenv)" ]; then
     eval "$(pipenv --completion)"
