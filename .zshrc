@@ -66,10 +66,16 @@ if [ -x "$(command -v tmux)" ]; then
     }
 fi
 
-# pipenv autocompletions
+# ZSH Autocompletions
+autoload -U bashcompinit
+bashcompinit
+
 if [ -x "$(command -v pipenv)" ]; then
     eval "$(pipenv --completion)"
     export PIPENV_PYTHON="${PYENV_ROOT}/shims/python"
+fi
+if [ -x "$(command -v pipx)" ]; then
+    eval "$(register-python-argcomplete pipx)"
 fi
 
 # Ensure that we have an ssh config with AddKeysToAgent set to true
