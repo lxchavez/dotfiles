@@ -92,8 +92,8 @@ rm -rf /var/lib/apt/lists/*
 
 # install Docker
 if ! [ -x "$(command -v docker)" ]; then
-    curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
-    sudo sh /tmp/get-docker.sh
+  curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
+  sudo sh /tmp/get-docker.sh
 fi
 
 # install Go
@@ -207,50 +207,60 @@ fi
 
 
 if [ -x "$(command -v zsh)" ]; then
-    zsh /tmp/bootstrap-zsh.sh
+  zsh /tmp/bootstrap-zsh.sh
 fi
 
 if ! [ -x "$(command -v code-server)" ]; then
-    echo "==> Installing code-server..."
-    export CODE_SERVER_VERSION="3.3.1"
-    mkdir -p "${HOME}/downloads"
-    cd "${HOME}/downloads"
-    curl -sSOL https://github.com/cdr/code-server/releases/download/v${CODE_SERVER_VERSION}/code-server_${CODE_SERVER_VERSION}_amd64.deb
-    sudo dpkg -i code-server_${CODE_SERVER_VERSION}_amd64.deb
-    systemctl --user enable --now code-server
+  echo "==> Installing code-server..."
+  export CODE_SERVER_VERSION="3.3.1"
+  mkdir -p "${HOME}/downloads"
+  cd "${HOME}/downloads"
+  curl -sSOL https://github.com/cdr/code-server/releases/download/v${CODE_SERVER_VERSION}/code-server_${CODE_SERVER_VERSION}_amd64.deb
+  sudo dpkg -i code-server_${CODE_SERVER_VERSION}_amd64.deb
+  systemctl --user enable --now code-server
 
-    if ! [ -x "$(command -v caddy)" ]; then
-        echo "deb [trusted=yes] https://apt.fury.io/caddy/ /" \
-            | sudo tee -a /etc/apt/sources.list.d/caddy-fury.list
-        sudo apt update
-        sudo apt-get install -qq caddy
+  if ! [ -x "$(command -v caddy)" ]; then
+    echo "deb [trusted=yes] https://apt.fury.io/caddy/ /" \
+      | sudo tee -a /etc/apt/sources.list.d/caddy-fury.list
+    sudo apt update
+    sudo apt-get install -qq caddy
 
-        if [-f "/etc/caddy/Caddyfile"]; then
-            export DOMAIN_NAME="dev.alexchavez.codes"
-            echo "${DOMAIN_NAME}\nreverse_proxy 127.0.0.1:8080" > /etc/caddy/Caddyfile
-            sudo systemctl reload caddy
-            echo "Now visit https://${DOMAIN_NAME}"
-            echo "code-server password is in ~/.config/code-server/config.yaml"
-        fi
+    if [-f "/etc/caddy/Caddyfile"]; then
+      export DOMAIN_NAME="dev.alexchavez.codes"
+      echo "${DOMAIN_NAME}\nreverse_proxy 127.0.0.1:8080" > /etc/caddy/Caddyfile
+      sudo systemctl reload caddy
+      echo "Now visit https://${DOMAIN_NAME}"
+      echo "code-server password is in ~/.config/code-server/config.yaml"
     fi
+  fi
 fi
 
 # install Python tools
 if ! [ -x "$(command -v pyenv )" ]; then 
+  echo "==> Installing pyenv..."
   curl https://pyenv.run | bash
 fi
 
+# pipx and standalone CLI programs/utils installed via pip
 if ! [ -x "$(command -v pipx )" ]; then 
+  echo "==> Installing pipx..."
   python3 -m pip install --user pipx
   python3 -m pipx ensurepath
+
+  if ! [ -x "$(command -v sam )" ]; then 
+    echo "==> Installing aws-sam-cli via pipx..."
+    pipx install aws-sam-cli
+  fi
 fi
 
 if ! [ -x "$(command -v pipenv )" ]; then
+  echo "==> Installing pipenv..."
   pipx install pipenv
 fi
 
 # AWS CLI
 if [ ! -x "$(command -v aws)" ]; then
+  echo "==> Installing awscli..."
   cd "${HOME}"
   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
   unzip awscliv2.zip
@@ -260,6 +270,7 @@ if [ ! -x "$(command -v aws)" ]; then
 fi
 
 if [ ! -x "$(command -v terraform)" ]; then
+  echo "==> Installing terraform cli..."
   export TERRAFORM_VERSION="0.12.26"
   cd "${HOME}/downloads"
   curl -sSOL "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
