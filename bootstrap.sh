@@ -212,11 +212,7 @@ fi
 
 if ! [ -x "$(command -v code-server)" ]; then
   echo "==> Installing code-server..."
-  export CODE_SERVER_VERSION="3.3.1"
-  mkdir -p "${HOME}/downloads"
-  cd "${HOME}/downloads"
-  curl -sSOL https://github.com/cdr/code-server/releases/download/v${CODE_SERVER_VERSION}/code-server_${CODE_SERVER_VERSION}_amd64.deb
-  sudo dpkg -i code-server_${CODE_SERVER_VERSION}_amd64.deb
+  curl -fsSL https://code-server.dev/install.sh | sh
   systemctl --user enable --now code-server
 
   if ! [ -x "$(command -v caddy)" ]; then
@@ -225,7 +221,7 @@ if ! [ -x "$(command -v code-server)" ]; then
     sudo apt update
     sudo apt-get install -qq caddy
 
-    if [-f "/etc/caddy/Caddyfile"]; then
+    if ! [-f "/etc/caddy/Caddyfile"]; then
       export DOMAIN_NAME="dev.alexchavez.codes"
       echo "${DOMAIN_NAME}\nreverse_proxy 127.0.0.1:8080" > /etc/caddy/Caddyfile
       sudo systemctl reload caddy
