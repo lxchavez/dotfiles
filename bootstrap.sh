@@ -274,5 +274,18 @@ if [ ! -x "$(command -v terraform)" ]; then
   mv "${HOME}/downloads/terraform" /usr/local/bin/terraform
 fi
 
+if [ ! -x "$(command -v vd)" ]; then
+  echo "==> Installing visidata..."
+  sudo apt install -y apt-transport-https
+  cd "${HOME}/downloads"
+  wget https://raw.githubusercontent.com/saulpw/deb-vd/master/devotees.gpg.key
+  sudo apt-key add devotees.gpg.key
+  sudo add-apt-repository \
+    "deb [arch=amd64] https://raw.githubusercontent.com/saulpw/deb-vd/master \
+    sid \
+    main"
+  sudo apt update && sudo apt install -y visidata
+fi
+
 echo ""
 echo "==> Done!"
