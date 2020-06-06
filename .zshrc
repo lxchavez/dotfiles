@@ -37,6 +37,9 @@ if [ -x "$(command -v xclip)" ]; then
     alias pbpaste='xclip -selection clipboard -o'
     alias pbcopy='xclip -selection clipboard'
 fi
+if [ -x "$(command -v vd)" ]; then
+    alias -s csv=vd
+fi
 
 # You may need to manually set your language environment
 export LC_ALL='en_US.UTF-8'
