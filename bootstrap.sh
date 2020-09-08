@@ -297,5 +297,12 @@ if [ ! -x "$(command -v bvm)" ]; then
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 fi
 
+if [ ! -x "$(command -v yarn)" ]; then
+  echo "==> Installing yarn..."
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+  sudo apt update && sudo apt install -y yarn
+fi
+
 echo ""
 echo "==> Done!"
