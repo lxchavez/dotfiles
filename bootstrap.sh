@@ -287,5 +287,10 @@ if [ ! -x "$(command -v vd)" ]; then
   sudo apt update && sudo apt install -y visidata
 fi
 
+if [ ! -x "$(command -v rbenv)" ]; then
+  echo "==> Installing rbenv..."
+  curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash
+fi
+
 echo ""
 echo "==> Done!"

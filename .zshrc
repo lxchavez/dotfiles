@@ -11,6 +11,12 @@ if [ -d /usr/local/go/bin ]; then
     PATH="/usr/local/go/bin:$PATH"
 fi
 
+# Add rbenv to the PATH
+if [ -d /root/.rbenv/bin ]; then
+    eval "$(rbenv init -)"
+    PATH="/root/.rbenv/bin:$PATH"
+fi
+
 # Aliases
 alias ls="ls --color=auto"
 alias ll="ls -lAh"
