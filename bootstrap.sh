@@ -292,5 +292,10 @@ if [ ! -x "$(command -v rbenv)" ]; then
   curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash
 fi
 
+if [ ! -x "$(command -v bvm)" ]; then
+  echo "==> Installing nvm..."
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+fi
+
 echo ""
 echo "==> Done!"
