@@ -13,8 +13,8 @@ fi
 
 # Add rbenv to the PATH
 if [ -d /root/.rbenv/bin ]; then
-    eval "$(rbenv init -)"
     PATH="/root/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
 fi
 
 # Aliases
