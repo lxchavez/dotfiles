@@ -227,7 +227,7 @@ if ! [ -x "$(command -v code-server)" ]; then
     sudo apt update
     sudo apt-get install -qq caddy
 
-    if ! [-f "/etc/caddy/Caddyfile"]; then
+    if ! [-x "/etc/caddy/Caddyfile"]; then
       export DOMAIN_NAME="dev.alexchavez.codes"
       echo "${DOMAIN_NAME}\nreverse_proxy 127.0.0.1:8080" > /etc/caddy/Caddyfile
       sudo systemctl reload caddy
