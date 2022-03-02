@@ -17,7 +17,7 @@ This terraform script creates a workstation on a DigitalOcean droplet. Can use m
 
 1. Generate a Digital Ocean API key. Install doctl and run `doctl auth init`. Check that auth is working with `doctl account get`. 
 
-1. If you haven't already, generate SSH key paris and add public key for the machine you're using to provision this on in Digital Ocean. Take note of your SSH key id on Digital Ocean via `doctl compute ssh-key list`. 
+1. If you haven't already, generate SSH key pair and add public key for the machine you're using to provision this on in Digital Ocean. Take note of your SSH key id on Digital Ocean via `doctl compute ssh-key list`. 
 
 1. Create workstation droplet:
 
