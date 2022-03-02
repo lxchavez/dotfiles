@@ -1,8 +1,30 @@
-provider "digitalocean" {}
+terraform {
+  required_providers {
+    digitalocean = {
+      source = "digitalocean/digitalocean"
+      version = "~> 2.0"
+    }
+  }
+}
+
+
+# Set the variable value using -var="do_token=..." CLI option
+variable "do_token" {}
+
+provider "digitalocean" {
+  token = var.do_token
+}
 
 variable "region" {
   default = "sfo2"
 }
+
+variable "ssh_key" { 
+  default = "~/.ssh/id_rsa"
+}
+
+# Set the variable value using -var="ssh_key_id=..." CLI option
+variable "ssh_key_id" {}
 
 resource "digitalocean_droplet" "dev" {
   name               = "cloud-dev-desktop"
@@ -11,7 +33,7 @@ resource "digitalocean_droplet" "dev" {
   region             = "${var.region}"
   backups            = true
   ipv6               = true
-  ssh_keys           = [27507921]                        # doctl compute ssh-key list
+  ssh_keys           = ["${var.ssh_key_id}"] # doctl compute ssh-key list
 
   provisioner "file" {
     source      = "bootstrap.sh"
@@ -20,7 +42,7 @@ resource "digitalocean_droplet" "dev" {
     connection {
       type        = "ssh"
       user        = "root"
-      private_key = "${file("~/.ssh/ipad_rsa")}"
+      private_key = "${file(var.ssh_key)}"
       timeout     = "2m"
       host = "${digitalocean_droplet.dev.ipv4_address}"
     }
@@ -33,7 +55,7 @@ resource "digitalocean_droplet" "dev" {
     connection {
       type        = "ssh"
       user        = "root"
-      private_key = "${file("~/.ssh/ipad_rsa")}"
+      private_key = "${file(var.ssh_key)}"
       timeout     = "2m"
       host = "${digitalocean_droplet.dev.ipv4_address}"
     }
@@ -48,7 +70,7 @@ resource "digitalocean_droplet" "dev" {
     connection {
       type        = "ssh"
       user        = "root"
-      private_key = "${file("~/.ssh/ipad_rsa")}"
+      private_key = "${file(var.ssh_key)}"
       timeout     = "2m"
       host = "${digitalocean_droplet.dev.ipv4_address}"
     }
