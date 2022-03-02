@@ -1,5 +1,11 @@
 #!/bin/bash
 echo ""
+
+echo "==> Waiting for boot to finish..."
+until [[ -f /var/lib/cloud/instance/boot-finished ]]; do
+  sleep 1
+done
+
 echo "==> Intializing system..."
 
 set -eu
