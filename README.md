@@ -33,8 +33,11 @@ $ terraform plan
 $ terraform apply -var "ssh_key_id=ssh key id from doctl" -var "do_token=your digitalocean api key"  --auto-approve
 ```
 
-1. SSH via mosh:
+## Connect
 
+Get Blink Shell on your iPad - https://blink.sh/
+
+Example SSH via mosh:
 ```
 $ mosh --no-init --ssh="ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p 22" root@<DROPLET_IP> -- tmux new-session -ADs main
 ```
