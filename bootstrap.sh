@@ -102,16 +102,6 @@ if ! [ -x "$(command -v docker)" ]; then
   sudo sh /tmp/get-docker.sh
 fi
 
-# install Go
-if ! [ -x "$(command -v go)" ]; then
-  echo " ==> Installing go..."
-  export GO_VERSION="1.14.3"
-  wget "https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz" 
-  tar -C /usr/local -xzf "go${GO_VERSION}.linux-amd64.tar.gz" 
-  rm -f "go${GO_VERSION}.linux-amd64.tar.gz"
-  export PATH="/usr/local/go/bin:$PATH"
-fi
-
 # install 1Password
 if ! [ -x "$(command -v op)" ]; then
   echo " ==> Installing 1Password .."
@@ -215,48 +205,10 @@ if [ -x "$(command -v zsh)" ]; then
   zsh /tmp/bootstrap-zsh.sh
 fi
 
-# if ! [ -x "$(command -v code-server)" ]; then
-#   echo "==> Installing code-server..."
-#   curl -fsSL https://code-server.dev/install.sh | sh
-#   systemctl --user enable --now code-server
-
-#   if ! [ -x "$(command -v caddy)" ]; then
-#     echo "deb [trusted=yes] https://apt.fury.io/caddy/ /" \
-#       | sudo tee -a /etc/apt/sources.list.d/caddy-fury.list
-#     sudo apt update
-#     sudo apt-get install -qq caddy
-
-#     if ! [-f "/etc/caddy/Caddyfile"]; then
-#       export DOMAIN_NAME="dev.alexchavez.codes"
-#       echo "${DOMAIN_NAME}\nreverse_proxy 127.0.0.1:8080" > /etc/caddy/Caddyfile
-#       sudo systemctl reload caddy
-#       echo "Now visit https://${DOMAIN_NAME}"
-#       echo "code-server password is in ~/.config/code-server/config.yaml"
-#     fi
-#   fi
-# fi
-
 # install Python tools
 if ! [ -x "$(command -v pyenv )" ]; then 
   echo "==> Installing pyenv..."
   curl https://pyenv.run | bash
-fi
-
-# pipx and standalone CLI programs/utils installed via pip
-if ! [ -x "$(command -v pipx )" ]; then 
-  echo "==> Installing pipx..."
-  python3 -m pip install --user pipx
-  python3 -m pipx ensurepath
-
-  if ! [ -x "$(command -v sam )" ]; then 
-    echo "==> Installing aws-sam-cli via pipx..."
-    pipx install aws-sam-cli
-  fi
-fi
-
-if ! [ -x "$(command -v pipenv )" ]; then
-  echo "==> Installing pipenv..."
-  pipx install pipenv
 fi
 
 # AWS CLI
@@ -269,15 +221,6 @@ if [ ! -x "$(command -v aws)" ]; then
   rm -rf awscliv2.zip
   rm -rf "${HOME}/awscliv2.zip"
 fi
-
-# if [ ! -x "$(command -v terraform)" ]; then
-#   echo "==> Installing terraform cli..."
-#   export TERRAFORM_VERSION="0.12.26"
-#   cd "${HOME}/downloads"
-#   curl -sSOL "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
-#   unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-#   mv "${HOME}/downloads/terraform" /usr/local/bin/terraform
-# fi
 
 if [ ! -x "$(command -v rbenv)" ]; then
   echo "==> Installing rbenv..."
