@@ -13,7 +13,13 @@ Instructions adapted from [@fatih](https://github.com/fatih/dotfiles/tree/master
 
 This terraform script creates a workstation on a DigitalOcean droplet. Can use my personal iPad to connect via mosh.
 
-### Install
+### Install Pre-Reqs
+1. Get a hold of a Linux box (AWS ECS free tier instances are great for this)
+1. Install Snap ([instructions for Amazon Linux 2](https://github.com/albuild/snap))
+1. Install doctl: `sudo snap install doctl`
+1. Install terraform: `sudo snap install terraform --classic`
+
+### Deploy
 
 1. Generate a Digital Ocean API key. Install doctl and run `doctl auth init`. Check that auth is working with `doctl account get`. 
 
