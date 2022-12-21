@@ -168,7 +168,7 @@ if [ ! -d "${HOME}/.fzf" ]; then
   git clone https://github.com/junegunn/fzf "${HOME}/.fzf"
   pushd "${HOME}/.fzf"
   git remote set-url origin git@github.com:junegunn/fzf.git 
-  ${HOME}/.fzf/install --bin --no-fish
+  yes | ${HOME}/.fzf/install
   popd
 fi
 
