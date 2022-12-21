@@ -16,7 +16,7 @@ provider "digitalocean" {
 }
 
 variable "region" {
-  default = "sfo2"
+  default = "sfo3"
 }
 
 variable "ssh_key" { 
