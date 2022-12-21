@@ -27,6 +27,7 @@ fi
 sudo apt-get install -qq \
   apache2-utils \
   apt-transport-https \
+  bat \
   ca-certificates \
   clang \
   cmake \
