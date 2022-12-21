@@ -46,6 +46,9 @@ fi
 if [ -x "$(command -v vd)" ]; then
     alias -s csv=vd
 fi
+if [ -x "$(command -v batcat)" ]; then
+    alias -s cat=batcat
+fi
 
 # You may need to manually set your language environment
 export LC_ALL='en_US.UTF-8'
