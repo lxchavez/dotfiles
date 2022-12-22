@@ -2,7 +2,7 @@
 	name = Alex Chavez
 	email = alex@alexchavez.net
 [core]
-	excludesfile = /root/.gitignore
+	excludesfile = ~/.gitignore
 	editor = vim
 [pull]
 	rebase = true
