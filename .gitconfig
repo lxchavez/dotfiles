@@ -1,3 +1,12 @@
 [user]
 	name = Alex Chavez
 	email = alex@alexchavez.net
+[core]
+	excludesfile = /root/.gitignore
+	editor = vim
+[pull]
+	rebase = true
+[rerere]
+	enabled = true
+[init]
+	defaultBranch = main
