@@ -200,6 +200,7 @@ if [ ! -d "${HOME}/workspace/dotfiles" ]; then
   ln -sfn $(pwd)/.config/nvim/init.vim "${HOME}/.config/nvim/init.vim"
   ln -sfn $(pwd)/.zshrc "${HOME}/.zshrc"
   ln -sfn $(pwd)/.gitconfig "${HOME}/.gitconfig"
+  ln -sfn $(pwd)/.gitignore "${HOME}/.gitignore"
 fi
 
 if [ -x "$(command -v zsh)" ]; then
